@@ -1,0 +1,37 @@
+# Xcode fajlovi koje ne želimo
+.DS_Store
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# DerivedData - build cache
+DerivedData/
+build/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Tuist
+/Tuist/Cache/
+
+# Xcode verzije fajlova
+*.xcuserstate
+
+# Editor fajlovi
+*.swp
+*.swo
+*.swn
