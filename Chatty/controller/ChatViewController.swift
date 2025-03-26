@@ -14,14 +14,20 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var uiTebleView: UITableView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var hintLabel: UILabel!
+    
     let db = Firestore.firestore()
     var messages: [Message] = []
+    var listener: ListenerRegistration? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         getMessages()
         handleKeyboard()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        listener?.remove()
     }
     
     //MARK: - Button Actions
@@ -63,10 +69,9 @@ class ChatViewController: UIViewController {
     //MARK: - Get (All) Messages
     
     func getMessages() {
-        db.collection(K.FStore.collectionName)
+         listener = db.collection(K.FStore.collectionName)
             .order(by: K.FStore.dateField)
             .addSnapshotListener { querySnapshot, error in
-                
                 if let snapshot = querySnapshot{
                     self.messages = []
                     for document in snapshot.documents {
@@ -84,6 +89,7 @@ class ChatViewController: UIViewController {
                     }
                 }
             }
+        
     }
 }
 
@@ -93,12 +99,9 @@ private extension ChatViewController {
         uiTebleView.dataSource = self
         textView.delegate = self
         textView.isScrollEnabled = false
-        
-        //        textView.textContainerInset = UIEdgeInsets(top: 12, left: 6, bottom: 6, right: 6);
-        
         title = K.appName
-        self.navigationItem.setHidesBackButton(true, animated: true)
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
         uiTebleView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
     }
