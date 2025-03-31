@@ -15,6 +15,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var hintLabel: UILabel!
     
+    @IBOutlet weak var textViewParent: UIView!
     let db = Firestore.firestore()
     var messages: [Message] = []
     var listener: ListenerRegistration? = nil
@@ -95,12 +96,16 @@ class ChatViewController: UIViewController {
 
 private extension ChatViewController {
     func setupUI(){
+        title = K.appName
         
         uiTebleView.dataSource = self
         textView.delegate = self
         textView.isScrollEnabled = false
-        title = K.appName
-        
+        textViewParent.layer.cornerRadius = 6
+        textView.layer.cornerRadius = 6
+        hintLabel?.layer.cornerRadius = 6
+        textView.clipsToBounds = true
+      
         self.navigationItem.setHidesBackButton(true, animated: true)
         uiTebleView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
         
@@ -167,11 +172,11 @@ extension ChatViewController: UITableViewDataSource {
             if email == message.sender{
                 cell.user1Image.isHidden = false
                 cell.user2Image.isHidden = true
-                cell.containerView.backgroundColor = UIColor.systemYellow
+                cell.containerView.backgroundColor = UIColor.init(named: K.BrandColors.brown)
             }else{
                 cell.user2Image.isHidden = false
                 cell.user1Image.isHidden = true
-                cell.containerView.backgroundColor = UIColor.init(named: K.BrandColors.lightPurple)
+                cell.containerView.backgroundColor = UIColor.init(named: K.BrandColors.yellow)
             }
         }
         

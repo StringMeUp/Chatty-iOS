@@ -13,10 +13,12 @@ struct K {
     static let loginSegue = "LoginToChat"
     
     struct BrandColors {
-        static let purple = "BrandPurple"
-        static let lightPurple = "BrandLightPurple"
-        static let blue = "BrandBlue"
-        static let lighBlue = "BrandLightBlue"
+        static let blue = "BrandYaleBlue"
+        static let lightBlue = "BrandYaleLightBlue"
+        static let yellow = "BrandNaplesYellow"
+        static let brown = "BrandSandyBrown"
+        static let red = "BrandTomato"
+        static let lemonChiffon = "BrandLemonChiffon"
     }
     
     struct FStore {
